@@ -191,15 +191,8 @@ Connects to backend using `POST /upload` and `POST /ask`.
 ## 🙋‍♂️ Author
 
 **Babaso Kale**  
-[Upwork Profile »](https://www.upwork.com/freelancers/~01yourid)  
-[LinkedIn »](https://linkedin.com/in/yourprofile)  
-Email: `your@email.com`
-
----
-
-## 📄 License
-
-Open for learning, experimentation, and portfolio use.  
-Commercial use requires attribution to the original repository.
+[Upwork Profile »](https://www.upwork.com/freelancers/babasokale)  
+[LinkedIn »](https://linkedin.com/in/babasokale)  
+Email: `babasokale@outlook.com`
 
 ---
