@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+langchain
+langchain-community
+chromadb
+PyPDF2
+python-multipart
+tiktoken
+sentence-transformers
+huggingface-hub

@@ -1,0 +1,22 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Environment variables / keys
+.env
+
+# Logs and DBs
+*.log
+*.sqlite3
+
+# IDE/editor folders
+.vscode/
+.idea/
+.DS_Store
+
+# Node modules if frontend exists
+frontend/node_modules/
