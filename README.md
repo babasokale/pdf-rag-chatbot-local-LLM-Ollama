@@ -1,6 +1,17 @@
-# 🧠 PDF RAG Chatbot with FastAPI + Local LLM (Ollama)
+# 🧠 PDF RAG Chatbot using FastAPI + Local LLM (Ollama)
 
-A **Retrieval-Augmented Generation (RAG)** chatbot that answers questions based on uploaded PDF documents. Built using **FastAPI** and **LangChain**, and powered by **local embeddings** + **Ollama (e.g., Mistral)** as the LLM backend.
+This project demonstrates how to build a **Retrieval-Augmented Generation (RAG)** chatbot that answers questions from uploaded PDF files. It uses **FastAPI** as the backend API server, integrates **LangChain**, and leverages **local embeddings** with **Ollama** running LLMs like Mistral — all on your machine with no external OpenAI usage.
+
+---
+
+## 📌 Key Features
+
+- Upload PDF documents via API
+- Extract text and split into chunks
+- Embed chunks using HuggingFace model
+- Store and search via Chroma vector store
+- Query using a local LLM via Ollama (e.g., Mistral)
+- Optional Angular 17+ chatbot frontend
 
 ---
 
@@ -9,63 +20,64 @@ A **Retrieval-Augmented Generation (RAG)** chatbot that answers questions based 
 ```
 pdf-rag-chatbot/
 ├── backend/
-│   ├── app.py                # FastAPI app
-│   ├── rag_pipeline.py       # RAG logic
-│   └── requirements.txt      # Python dependencies
-└── frontend/ (optional Angular UI)
+│   ├── app.py              # FastAPI server
+│   ├── rag_pipeline.py     # RAG logic (embeddings, retrieval, QA)
+│   ├── requirements.txt    # Python dependencies
+└── frontend/               # Optional Angular chatbot UI
 ```
 
 ---
 
-## 🚀 Setup Instructions
+## 🧱 Setup Instructions
 
 ### ✅ Prerequisites
 
-- Python 3.10+ installed
-- Git installed
-- [Ollama installed](https://ollama.com/download) on your local machine
-- Postman or any HTTP client for testing API
-- Optional: Angular CLI (for frontend UI)
+- Python 3.10+
+- [Ollama installed](https://ollama.com/download) on your machine
+- Git
+- Postman or HTTP client
+- (Optional) Angular CLI for UI
 
 ---
 
-### 🧱 1. Clone the Repository
+### 🔧 1. Clone the Repository
 
 ```bash
-git clone https://github.com/babasokale/pdf-rag-chatbot.git
-cd pdf-rag-chatbot/backend
+git clone https://github.com/babasokale/pdf-rag-chatbot-local-LLM-Ollama.git
+cd pdf-rag-chatbot-local-LLM-Ollama/backend
 ```
 
 ---
 
-### 📦 2. Create & Activate Virtual Environment
+### 🧪 2. Setup Virtual Environment
 
 ```bash
 python -m venv venv
-venv\Scripts\activate   # On Windows
-# source venv/bin/activate  # On Linux/macOS
+venv\Scripts\activate   # Windows
+# source venv/bin/activate   # macOS/Linux
 ```
 
 ---
 
-### 📥 3. Install Dependencies
+### 📦 3. Install Python Dependencies
 
-Make sure `requirements.txt` includes:
+Ensure this is in `requirements.txt`:
 
-```txt
+```
 fastapi
 uvicorn
 langchain
 langchain-community
+langchain-core
 chromadb
-PyPDF2
+pypdf
 python-multipart
 tiktoken
-sentence-transformers
+PyPDF2
 huggingface-hub
 ```
 
-Then run:
+Then install:
 
 ```bash
 pip install -r requirements.txt
@@ -73,45 +85,29 @@ pip install -r requirements.txt
 
 ---
 
-### 🤖 4. Run Ollama Locally
+### 🤖 4. Run Ollama LLM
 
-Download and start a local model like **Mistral**:
+Start a local model (e.g., Mistral):
 
 ```bash
 ollama run mistral
 ```
 
-Ollama will listen at `http://localhost:11434`. Keep this running in the background.
+This runs a local LLM at `http://localhost:11434`.
 
 ---
 
-### 🔧 5. Set Up `RAGPipeline`
-
-Use local embeddings + Ollama model:
-
-```python
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import Ollama
-
-self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-self.llm = Ollama(model="mistral")
-```
-
-Also use `RecursiveCharacterTextSplitter`, `Chroma`, and `RetrievalQA` from `langchain`.
-
----
-
-### ▶️ 6. Run the FastAPI Server
+### ▶️ 5. Start FastAPI Server
 
 ```bash
 uvicorn app:app --reload
 ```
 
-API will be available at: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+Server URL: http://127.0.0.1:8000
 
 ---
 
-## 📤 PDF Upload API
+## 📤 Upload PDF
 
 ### Endpoint
 
@@ -119,15 +115,15 @@ API will be available at: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 POST /upload
 ```
 
-### Form-Data Body
+**Form-data:**
 
-| Key  | Type | Value       |
-|------|------|-------------|
-| file | File | PDF file    |
+| Key  | Type | Description     |
+|------|------|-----------------|
+| file | File | Your PDF file   |
 
 ---
 
-## 💬 Ask Question API
+## 💬 Ask a Question
 
 ### Endpoint
 
@@ -135,7 +131,7 @@ POST /upload
 POST /ask
 ```
 
-### JSON Body
+**JSON Payload:**
 
 ```json
 {
@@ -143,7 +139,7 @@ POST /ask
 }
 ```
 
-### Response Format
+**Response:**
 
 ```json
 {
@@ -157,48 +153,53 @@ POST /ask
 
 ---
 
-## 🌐 Optional Angular Chatbot UI
+## 🌐 Angular Frontend (Optional)
 
-You can add a separate Angular 17/19 frontend with:
+Optional chatbot UI built in Angular 17+ includes:
 
-- 📄 PDF upload
+- 📄 PDF Upload UI
 - 💬 Chat interface
-- ✅ Material Design + API integration
+- 🎨 Material Design with API Integration
 
-This frontend can talk to the FastAPI backend using:
-- `POST /upload`
-- `POST /ask`
+Connects to backend using `POST /upload` and `POST /ask`.
 
 ---
 
-## 🛠 Common Errors & Fixes
+## ⚠️ Common Issues
 
-| Error                                  | Fix                                                              |
-|---------------------------------------|------------------------------------------------------------------|
-| `openai.RateLimitError`               | You're using OpenAI embeddings. Switch to HuggingFace.          |
-| `ModuleNotFoundError: langchain_...`  | Install `langchain-community`: `pip install langchain-community` |
-| `No response or timeout`              | Ollama model may be cold-starting. First run takes time.        |
+| Issue                                   | Fix                                                              |
+|----------------------------------------|------------------------------------------------------------------|
+| OpenAI quota/429 error                 | You're still using OpenAI — switch to HuggingFace embeddings     |
+| `langchain_community` not found        | `pip install langchain-community`                                |
+| Long wait on first LLM query           | Ollama cold start — model loads on demand                        |
+| API key leaked in commit               | Rotate key, use `.env`, and scrub history using BFG              |
 
 ---
 
-## 📦 Deployment to Azure (Optional)
+## ☁️ Deploy to Azure (Optional)
 
-You can deploy the FastAPI app to Azure Web App using:
-- GitHub Actions or FTP publish
-- Startup command: `uvicorn app:app --host=0.0.0.0 --port=8000`
-- Environment: Linux Python 3.10 or above
+- Use GitHub Actions or FTP
+- Use Linux App Service
+- Startup command:
+  ```bash
+  uvicorn app:app --host=0.0.0.0 --port=8000
+  ```
+- For Ollama, use Docker/container-based deployment with preloaded model (advanced)
 
-For local LLM support, you must use **containerized deployment** with Ollama set up inside the image (advanced).
+---
+
+## 🙋‍♂️ Author
+
+**Babaso Kale**  
+[Upwork Profile »](https://www.upwork.com/freelancers/~01yourid)  
+[LinkedIn »](https://linkedin.com/in/yourprofile)  
+Email: `your@email.com`
 
 ---
 
 ## 📄 License
 
-This project is open for learning and prototyping. Commercial use should credit the base template if you reuse as-is.
+Open for learning, experimentation, and portfolio use.  
+Commercial use requires attribution to the original repository.
 
 ---
-
-## 📬 Contact
-
-Created by **Babaso Kale**  
-[Upwork Profile](https://www.upwork.com/freelancers/babasokale) | [Email](mailto:babasokale@outlook.com)
