@@ -1,0 +1,14 @@
+.chat-box {
+  padding: 20px;
+  .full-width {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .response {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+  }
+}

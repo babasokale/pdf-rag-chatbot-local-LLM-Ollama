@@ -32,7 +32,7 @@ pdf-rag-chatbot/
 ### 🧱 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-name/pdf-rag-chatbot.git
+git clone https://github.com/babasokale/pdf-rag-chatbot.git
 cd pdf-rag-chatbot/backend
 ```
 
@@ -204,4 +204,4 @@ This project is open for learning and prototyping. Commercial use should credit 
 ## 📬 Contact
 
 Created by **Babaso Kale**  
-[Upwork Profile](https://www.upwork.com/freelancers/~01yourid) | [Email](mailto:your@email.com)
+[Upwork Profile](https://www.upwork.com/freelancers/babasokale) | [Email](mailto:babasokale@outlook.com)

@@ -1,0 +1,20 @@
+<div class="chat-box">
+  <mat-form-field class="full-width" appearance="outline">
+    <mat-label>Ask a question</mat-label>
+    <input matInput [(ngModel)]="question" (keyup.enter)="ask()" />
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" (click)="ask()" [disabled]="loading">
+    Ask
+  </button>
+
+  <div class="response" *ngIf="loading">
+    <mat-spinner diameter="30"></mat-spinner>
+    <span>Thinking...</span>
+  </div>
+
+  <div class="response" *ngIf="answer">
+    <strong>Answer:</strong>
+    <p>{{ answer }}</p>
+  </div>
+</div>

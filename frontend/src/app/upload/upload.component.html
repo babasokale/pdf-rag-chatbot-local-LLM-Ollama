@@ -1,0 +1,13 @@
+<mat-card class="upload-card">
+  <div class="upload-content">
+    <h3 class="upload-title">📄 Upload PDF Document</h3>
+
+    <input type="file" #fileInput hidden (change)="upload($event)" />
+
+    <button mat-raised-button color="primary" (click)="openFileDialog()" class="upload-btn">
+  <mat-icon>upload</mat-icon>
+  <span>Choose PDF</span>
+</button>
+
+  </div>
+</mat-card>
