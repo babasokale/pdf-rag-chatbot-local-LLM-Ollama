@@ -57,14 +57,11 @@ fastapi
 uvicorn
 langchain
 langchain-community
-langchain-core
-langchainhub
 chromadb
-pypdf
+PyPDF2
 python-multipart
 tiktoken
-PyPDF2
-openai
+sentence-transformers
 huggingface-hub
 ```
 
